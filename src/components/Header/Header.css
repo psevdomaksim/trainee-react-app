@@ -1,0 +1,17 @@
+header {
+  display: flex;
+  flex-direction: column;
+  margin: 3rem 0;
+}
+
+header h1 {
+  font-size: 3.5rem;
+}
+
+.header-description {
+  font-size: 1.5rem;
+  line-height: 2.2rem;
+  margin-top: 20px;
+  padding-right: 20rem;
+  font-weight: 400;
+}

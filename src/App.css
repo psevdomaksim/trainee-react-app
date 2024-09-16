@@ -1,38 +1,100 @@
-.App {
-  text-align: center;
+.wrapper {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  position: relative;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+h1 {
+  font-family: "Metropolis", sans-serif;
+  margin: 0;
+}
+p {
+  margin: 0;
+}
+body {
+  margin: 0;
+  box-sizing: inherit;
+  font-style: normal;
+  font-family: Open Sans, sans-serif;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+main {
+  background-color: #ebf2f2;
+  width: 100%;
+  height: auto;
+  padding: 20px 0;
+}
+
+.logo {
+  max-height: 50px;
+}
+
+hr {
+  border: 1px solid #ebf2f2;
+  margin: 0;
+}
+
+/* media requests */
+
+@media (min-width: 1000px) {
+  .card {
+    width: calc((90% - 20px) / 3);
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+@media (min-width: 900px) {
+  .burger {
+    visibility: hidden !important;
   }
-  to {
-    transform: rotate(360deg);
+}
+
+@media (max-width: 900px) {
+  header {
+    margin-top: 6rem !important;
+  }
+  .nav-list {
+    display: none !important;
+  }
+  .burger_icon {
+    display: block !important;
+    right: 0 !important;
+  }
+  .navbar-wrapper {
+    position: fixed !important;
+    border-bottom: 1px solid #ebf2f2 !important;
+    height: 40px !important;
+    position: fixed !important;
+    top: 0 !important;
+    z-index: 1 !important;
+  }
+} 
+
+@media (min-width: 800px) and (max-width: 1000px) {
+  .cards {
+    width: 100% !important;
+  }
+  .card {
+    width: 40% !important;
+  }
+  .header-description,
+  .header-h1 {
+    padding: 0 1rem !important;
+  }
+  .search-input{
+    width: 50% !important;
+  }
+}
+
+@media (max-width: 800px) {
+  .card {
+    width: 100% !important;
+  }
+  .header-description,
+  .header-h1 {
+    padding: 0 1rem !important;
+  }
+  .search-input{
+    width: 70% !important;
   }
 }
