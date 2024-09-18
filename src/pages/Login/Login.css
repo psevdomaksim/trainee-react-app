@@ -1,0 +1,79 @@
+.login-wrapper {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  margin: auto;
+
+  height: 12em;
+
+  width: 50%;
+  margin-top: 6em;
+}
+
+.login-form {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  border-radius: 5px;
+  background-color: #f6f8fa;
+  padding: 30px;
+  border: 1px solid #d1d9e0;
+}
+.input-block {
+  margin: 15px 0;
+  font-size: 14px;
+}
+.login-input {
+  margin: 5px 0;
+  border-radius: 5px;
+  border: 2px solid rgb(46, 131, 46);
+  line-height: 20px;
+  padding: 5px 12px;
+}
+
+.login-input:focus {
+  border-color: rgb(255, 255, 255);
+}
+
+.login-button {
+  width: 50%;
+}
+.login-button {
+	display: inline-block;	
+	box-sizing: border-box;
+	padding: 0 24px;
+	margin: 15px;
+	outline: none;
+	border: none;    
+	border-radius: 3px;
+	height: 37px;
+	line-height: 37px;
+	font-size: 14px; 
+	text-transform: uppercase;
+	font-weight: normal;
+	text-decoration: none;
+	color: #fff;
+	background-color: #05cd51;
+	cursor: pointer;
+	user-select: none;
+	appearance: none;
+	touch-action: manipulation;
+	transition: box-shadow .18s ease-out,background .18s ease-out,color .18s ease-out;
+}
+.login-button:focus-visible {
+	box-shadow: 0 0 0 3px lightskyblue;
+}
+.login-button:hover {
+	box-shadow: 0 1px 1px 0  #cfcfcf, 0 2px 5px 0  #cfcfcf;
+}
+.login-button:active {
+	background-color: #058c38 !important;
+}
+.login-button:disabled {
+	background-color: #aed2bc;
+	color: #444;
+	pointer-events: none;
+}

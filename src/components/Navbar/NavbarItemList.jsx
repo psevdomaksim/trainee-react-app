@@ -13,14 +13,14 @@ const NavbarItemList = () => {
     <nav>
       <div className="wrapper">
         <div className="navbar-wrapper">
-          <img className="logo" src={logo} />
+          <img alt="logo" className="logo" src={logo} />
 
           <ul className="nav-list">
             {navbarList?.map((navitem) => (
               <NavbarItem key={navitem.id} navitem={navitem} />
             ))}
           </ul>
-          <BurgerList navbarItems={navbarItems} />
+          <BurgerList navbarItems={navbarList} />
         </div>
       </div>
     </nav>

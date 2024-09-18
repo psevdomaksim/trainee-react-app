@@ -226,4 +226,12 @@ const navbarItems = [
   },
 ];
 
-export { navbarItems, cards };
+const users = [
+  {
+    id: 1,
+    username: "admin",
+    password: "1234"
+  }
+]
+
+export { navbarItems, cards, users };
