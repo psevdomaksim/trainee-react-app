@@ -1,19 +1,22 @@
-import './App.css';
-import CardItemList from './components/Card/CardItemList';
-import Header from './components/Header/Header';
-import NavbarItemList from './components/Navbar/NavbarItemList';
-import SearchInput from './components/SearchInput/SearchInput';
-
-
+import { BrowserRouter } from "react-router-dom";
+import "./App.css";
+import AppRoutes from "./components/AppRoutes";
+import NavbarItemList from "./components/Navbar/NavbarItemList";
 
 function App() {
   return (
     <div className="App">
-      <NavbarItemList/>
+      <BrowserRouter>
+        <NavbarItemList />
+        <hr/>
+        <AppRoutes />
+      </BrowserRouter>
+
+      {/* <NavbarItemList/>
       <hr/>
       <Header/>
    
-      <CardItemList/>
+      <CardItemList/> */}
     </div>
   );
 }

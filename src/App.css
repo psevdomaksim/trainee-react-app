@@ -35,6 +35,8 @@ hr {
   margin: 0;
 }
 
+
+
 /* media requests */
 
 @media (min-width: 1000px) {
@@ -67,6 +69,9 @@ hr {
     position: fixed !important;
     top: 0 !important;
     z-index: 1 !important;
+  }
+  .login-wrapper{
+    margin-top: 10em !important;
   }
 } 
 
