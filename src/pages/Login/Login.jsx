@@ -1,39 +1,33 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import "./Login.css";
-import { StoreContext } from "../..";
-import { loginAC } from "../../redux/Action Creators/AuthAC";
+import { apiErrorAC, loginAC } from "../../redux/ActionCreators/AuthAC";
+import { useDispatch, useSelector } from "react-redux";
 const Login = (props) => {
-  const store = useContext(StoreContext);
+  const dispatch = useDispatch();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [errorMsg, setErrorMsg] = useState("");
+  const errorMsg = useSelector(state=>state.authPage.errorMessage)
 
-  const handleChange = (e) => {
-    setErrorMsg("");
-    switch (e.target.id) {
-      case "username":
-        setUsername(e.target.value);
-        break;
-      case "password":
-        setPassword(e.target.value);
-        break;
-      default:
-        return;
-    }
-  };
+
+  const handleUsername = (e) =>{
+    dispatch(apiErrorAC(""));
+    setUsername(e.target.value);
+  }
+
+  const handlePassword = (e) =>{
+    dispatch(apiErrorAC(""));
+    setPassword(e.target.value);
+  }
 
   const login = (e) => {
     if (username !== "" && password !== "") {
-      store.dispatch(loginAC(username, password));
+      dispatch(loginAC(username, password));
     } else {
-      setErrorMsg(true);
+      dispatch(apiErrorAC("Inputs should not be empty"));
     }
     e.preventDefault();
   };
 
-  store.subscribe(() => {
-    setErrorMsg(store.getState().authPage.errorMessage);
-  });
 
   return (
     <>
@@ -48,7 +42,7 @@ const Login = (props) => {
               placeholder="username"
               id="username"
               value={username}
-              onChange={(e) => handleChange(e)}
+              onChange={(e) => handleUsername(e)}
             ></input>
           </div>
           <div className="input-block">
@@ -59,7 +53,7 @@ const Login = (props) => {
               placeholder="password"
               id="password"
               value={password}
-              onChange={(e) => handleChange(e)}
+              onChange={(e) => handlePassword(e)}
             ></input>
           </div>
           <b style={{ color: "red" }}>{errorMsg}</b>

@@ -1,18 +1,13 @@
-import React, { useContext, useState } from "react";
+import React from "react";
 import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 import { HOME_ROUTE, LOGIN_ROUTE } from "../utils/routes_consts";
-import { StoreContext } from "..";
-import { authRoutes, publicRoutes } from "../routes";
+import { useSelector } from "react-redux";
+import Login from "../pages/Login/Login";
+import Home from "../pages/Home";
 
 const AppRoutes = () => {
-  const store = useContext(StoreContext);
-  const [isAuth, setIsAuth] = useState();
-
   const location = useLocation();
-
-  store.subscribe(() => {
-    setIsAuth(store.getState().authPage.isAuth);
-  });
+  const isAuth = useSelector((state) => state.authPage.isAuth);
 
   if (location.pathname === LOGIN_ROUTE && isAuth) {
     return <Navigate to={HOME_ROUTE} />;
@@ -20,13 +15,8 @@ const AppRoutes = () => {
 
   return (
     <Routes>
-      {isAuth &&
-        authRoutes.map(({ path, Component }) => (
-          <Route key={path} path={path} element={<Component />} exact />
-        ))}
-      {publicRoutes.map(({ path, Component }) => (
-        <Route key={path} path={path} element={<Component />} exact />
-      ))}
+      {isAuth && <Route path={LOGIN_ROUTE} element={<Login />} exact />}
+      {<Route path={HOME_ROUTE} element={<Home />} exact />}
 
       <Route path="*" element={<Navigate to={LOGIN_ROUTE} />} />
     </Routes>

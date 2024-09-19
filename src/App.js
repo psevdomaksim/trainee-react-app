@@ -11,12 +11,6 @@ function App() {
         <hr/>
         <AppRoutes />
       </BrowserRouter>
-
-      {/* <NavbarItemList/>
-      <hr/>
-      <Header/>
-   
-      <CardItemList/> */}
     </div>
   );
 }

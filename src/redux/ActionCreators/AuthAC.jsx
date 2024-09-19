@@ -7,14 +7,18 @@ export const loginAC = (username, password) => {
   });
 
   if (findUser === undefined) {
-    return {
-      type: API_ERROR,
-      message: "User with this data not found",
-    };
+    return apiErrorAC("User with this data not found");
   }
 
   return {
     type: LOGIN,
     user: { username, password },
+  };
+};
+
+export const apiErrorAC = (msg) => {
+  return {
+    type: API_ERROR,
+    message: msg,
   };
 };
