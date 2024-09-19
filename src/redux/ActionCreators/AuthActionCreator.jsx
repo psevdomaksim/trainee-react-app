@@ -1,13 +1,13 @@
 import { users } from "../../db";
-import { API_ERROR, LOGIN } from "../../utils/AC_consts";
+import { API_ERROR, LOGIN } from "../../utils/ActionCreator_consts";
 
-export const loginAC = (username, password) => {
+export const loginActionCreator = (username, password) => {
   const findUser = users.find((el) => {
     return el.username === username && el.password === password;
   });
 
   if (findUser === undefined) {
-    return apiErrorAC("User with this data not found");
+    return apiErrorActionCreator("User with this data not found");
   }
 
   return {
@@ -16,7 +16,7 @@ export const loginAC = (username, password) => {
   };
 };
 
-export const apiErrorAC = (msg) => {
+export const apiErrorActionCreator = (msg) => {
   return {
     type: API_ERROR,
     message: msg,

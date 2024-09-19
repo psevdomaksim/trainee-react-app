@@ -1,33 +1,31 @@
 import React, { useState } from "react";
 import "./Login.css";
-import { apiErrorAC, loginAC } from "../../redux/ActionCreators/AuthAC";
+import { apiErrorActionCreator, loginActionCreator } from "../../redux/ActionCreators/AuthActionCreator";
 import { useDispatch, useSelector } from "react-redux";
-const Login = (props) => {
+const Login = () => {
   const dispatch = useDispatch();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const errorMsg = useSelector(state=>state.authPage.errorMessage)
-
-
-  const handleUsername = (e) =>{
-    dispatch(apiErrorAC(""));
+  const errorMsg = useSelector((state) => state.authPage.errorMessage);
+ 
+  const handleUsername = (e) => {
+    dispatch(apiErrorActionCreator(""));
     setUsername(e.target.value);
-  }
+  };
 
-  const handlePassword = (e) =>{
-    dispatch(apiErrorAC(""));
+  const handlePassword = (e) => {
+    dispatch(apiErrorActionCreator(""));
     setPassword(e.target.value);
-  }
+  };
 
   const login = (e) => {
     if (username !== "" && password !== "") {
-      dispatch(loginAC(username, password));
+      dispatch(loginActionCreator(username, password));
     } else {
-      dispatch(apiErrorAC("Inputs should not be empty"));
+      dispatch(apiErrorActionCreator("Inputs should not be empty"));
     }
     e.preventDefault();
   };
-
 
   return (
     <>

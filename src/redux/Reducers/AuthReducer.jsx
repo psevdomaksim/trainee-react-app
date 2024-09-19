@@ -1,4 +1,4 @@
-import { API_ERROR, LOGIN } from "../../utils/AC_consts";
+import { API_ERROR, LOGIN } from "../../utils/ActionCreator_consts";
 
 let initialState = {
   currentLogin: null,
