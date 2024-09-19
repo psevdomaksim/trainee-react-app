@@ -15,8 +15,11 @@ const AppRoutes = () => {
 
   return (
     <Routes>
-      {isAuth && <Route path={LOGIN_ROUTE} element={<Login />} exact />}
-      {<Route path={HOME_ROUTE} element={<Home />} exact />}
+      {!isAuth ? (
+        <Route path={LOGIN_ROUTE} element={<Login />} exact />
+      ) : (
+        <Route path={HOME_ROUTE} element={<Home />} exact />
+      )}
 
       <Route path="*" element={<Navigate to={LOGIN_ROUTE} />} />
     </Routes>
