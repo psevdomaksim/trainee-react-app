@@ -1,6 +1,6 @@
 import React from "react";
 import { Navigate, Route, Routes, useLocation } from "react-router-dom";
-import { HOME_ROUTE, LOGIN_ROUTE } from "../utils/Routes_consts";
+import { HOME_ROUTE, LOGIN_ROUTE } from "../utils/routes_consts";
 import { useSelector } from "react-redux";
 import Login from "../pages/Login/Login";
 import Home from "../pages/Home";

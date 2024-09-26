@@ -1,4 +1,4 @@
-import { API_ERROR, LOGIN } from "../../utils/ActionCreator_consts";
+import { API_ERROR, LOGIN } from "../../utils/actionCreator_consts";
 
 let initialState = {
   currentLogin: null,
@@ -9,20 +9,20 @@ let initialState = {
 const AuthReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOGIN: {
-      state = {
+      return {
         ...state,
         currentLogin: action.user,
         isAuth: true,
+        errorMessage: "", 
       };
-      return state;
     }
 
     case API_ERROR: {
-      state = {
+      return {
         ...state,
-        errorMessage: action.message,
+        errorMessage: action.message, 
+        isAuth: false, 
       };
-      return state;
     }
 
     default:

@@ -1,18 +1,28 @@
 import React, { useEffect, useState } from "react";
 import "../../App.css";
 import "./Card.css";
-import { cards } from "../../db";
 import CardItem from "./CardItem";
 import SearchInput from "../SearchInput/SearchInput";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchCardsThunkCreator } from "../../redux/ActionCreators/CardsActionCreator";
 
 const CardItemList = () => {
+  const dispatch = useDispatch();
   const [searchValue, setSearchValue] = useState("");
-  const [cardList, setCardList] = useState(cards);
-  const [filteredCardList, setFilteredCardList] = useState(cards);
+  const cardList = useSelector((state) => state.cardsPage.cards);
+  const [filteredCardList, setFilteredCardList] = useState();
 
   const handleChange = (e) => {
     setSearchValue(e.target.value);
   };
+
+  useEffect(() => {
+    dispatch(fetchCardsThunkCreator());
+  }, []);
+
+  useEffect(() => {
+    filterCards();
+  }, [searchValue, cardList]);
 
   const filterCards = () => {
     let debounceTimeout;
@@ -28,10 +38,6 @@ const CardItemList = () => {
       );
     }, 300);
   };
-
-  useEffect(() => {
-    filterCards();
-  }, [searchValue]);
 
   return (
     <>

@@ -1,20 +1,26 @@
-import { users } from "../../db";
-import { API_ERROR, LOGIN } from "../../utils/ActionCreator_consts";
+import { fetchOneUserByLogin, login } from "../../http/authApi.js";
+import { API_ERROR, LOGIN } from "../../utils/actionCreator_consts";
 
-export const loginActionCreator = (username, password) => {
-  const findUser = users.find((el) => {
-    return el.username === username && el.password === password;
-  });
-
-  if (findUser === undefined) {
-    return apiErrorActionCreator("User with this data not found");
-  }
-
+export const loginActionCreator = (user) => {
   return {
     type: LOGIN,
-    user: { username, password },
+    user: user,
   };
 };
+
+export const loginThunkCreator = (username, password) => {
+  return (dispatch) => {
+    return login({ username, password })  // Return the promise for better chaining in the test
+      .then((user) => {
+        dispatch(loginActionCreator(user));
+      })
+      .catch((err) => {
+        const errorMessage = err.response?.data?.message || 'Unknown error'; // Safeguard against undefined errors
+        dispatch(apiErrorActionCreator(errorMessage));
+      });
+  };
+};
+
 
 export const apiErrorActionCreator = (msg) => {
   return {
