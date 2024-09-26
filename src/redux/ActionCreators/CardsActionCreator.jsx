@@ -1,5 +1,6 @@
 import { fetchCards } from "../../http/cardsApi";
-import { FETCH_CARDS } from "../../utils/actionCreator_consts";
+import { FETCH_CARDS } from "../../utils/ActionCreator_consts";
+
 
 // fetch cards
 export const fetchCardsActionCreator = (data) => {

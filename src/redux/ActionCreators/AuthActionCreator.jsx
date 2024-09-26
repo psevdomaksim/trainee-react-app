@@ -1,5 +1,5 @@
-import { fetchOneUserByLogin, login } from "../../http/authApi.js";
-import { API_ERROR, LOGIN } from "../../utils/actionCreator_consts";
+import { login } from "../../http/authApi.js";
+import { API_ERROR, LOGIN } from "../../utils/ActionCreator_consts.js";
 
 export const loginActionCreator = (user) => {
   return {
