@@ -10,17 +10,16 @@ export const loginActionCreator = (user) => {
 
 export const loginThunkCreator = (username, password) => {
   return (dispatch) => {
-    return login({ username, password })  // Return the promise for better chaining in the test
+    return login({ username, password })
       .then((user) => {
         dispatch(loginActionCreator(user));
       })
       .catch((err) => {
-        const errorMessage = err.response?.data?.message || 'Unknown error'; // Safeguard against undefined errors
+        const errorMessage = err.response?.data?.message || "Unknown error";
         dispatch(apiErrorActionCreator(errorMessage));
       });
   };
 };
-
 
 export const apiErrorActionCreator = (msg) => {
   return {

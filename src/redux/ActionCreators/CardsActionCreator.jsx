@@ -1,7 +1,6 @@
 import { fetchCards } from "../../http/cardsApi";
 import { FETCH_CARDS } from "../../utils/ActionCreator_consts";
 
-
 // fetch cards
 export const fetchCardsActionCreator = (data) => {
   return {
@@ -10,9 +9,9 @@ export const fetchCardsActionCreator = (data) => {
   };
 };
 
-export const fetchCardsThunkCreator = () => {
+export const fetchCardsThunkCreator = (searchValue) => {
   return (dispatch) => {
-    fetchCards().then((data) => {
+    fetchCards(searchValue).then((data) => {
       dispatch(fetchCardsActionCreator(data));
     });
   };

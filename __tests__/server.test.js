@@ -1,6 +1,5 @@
 const fs = require('fs');
-const { login } = require('../server'); // Adjust the path accordingly
-const { app } = require('../server'); // Adjust the path accordingly
+const { login } = require('../server'); 
 
 jest.mock('fs');
 
