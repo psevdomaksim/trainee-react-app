@@ -15,8 +15,16 @@ const CardItemList = () => {
     setSearchValue(e.target.value);
   };
 
+  const filterCards = () => {
+    let debounceTimeout;
+    clearTimeout(debounceTimeout);
+    debounceTimeout = setTimeout(() => {
+      dispatch(fetchCardsThunkCreator(searchValue));
+    }, 300);
+  };
+
   useEffect(() => {
-    dispatch(fetchCardsThunkCreator(searchValue));
+    filterCards();
   }, [searchValue]);
 
   return (
