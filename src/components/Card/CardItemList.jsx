@@ -1,43 +1,41 @@
 import React, { useEffect, useState } from "react";
 import "../../App.css";
 import "./Card.css";
-import { cards } from "../../db";
 import CardItem from "./CardItem";
 import SearchInput from "../SearchInput/SearchInput";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchCardsThunkCreator } from "../../redux/ActionCreators/CardsActionCreator";
 
 const CardItemList = () => {
+  const dispatch = useDispatch();
   const [searchValue, setSearchValue] = useState("");
-  const [cardList, setCardList] = useState(cards);
-  const [filteredCardList, setFilteredCardList] = useState(cards);
+  const cardList = useSelector((state) => state.cardsPage.cards);
+  const [debounceTimeout, setDebounceTimeout] = useState(null);
 
   const handleChange = (e) => {
     setSearchValue(e.target.value);
   };
 
-  const filterCards = () => {
-    let debounceTimeout;
-    clearTimeout(debounceTimeout);
-    debounceTimeout = setTimeout(() => {
-      setFilteredCardList(
-        cardList.filter((card) => {
-          return (
-            card.header.toLowerCase().includes(searchValue.toLowerCase()) ||
-            card.description.toLowerCase().includes(searchValue.toLowerCase())
-          );
-        })
-      );
-    }, 300);
-  };
-
   useEffect(() => {
-    filterCards();
-  }, [searchValue]);
+    if (debounceTimeout) {
+      clearTimeout(debounceTimeout);
+    }
+
+    const timeoutId = setTimeout(() => {
+      dispatch(fetchCardsThunkCreator(searchValue));
+    }, 300);
+    setDebounceTimeout(timeoutId);
+
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, [searchValue, dispatch]);
 
   return (
     <>
       <SearchInput handleChange={handleChange} />
       <section className="cards">
-        {filteredCardList?.map((card) => (
+        {cardList?.map((card) => (
           <CardItem key={card.id} card={card} />
         ))}
       </section>

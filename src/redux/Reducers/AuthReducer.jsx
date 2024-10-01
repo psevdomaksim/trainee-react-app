@@ -9,20 +9,20 @@ let initialState = {
 const AuthReducer = (state = initialState, action) => {
   switch (action.type) {
     case LOGIN: {
-      state = {
+      return {
         ...state,
         currentLogin: action.user,
         isAuth: true,
+        errorMessage: "", 
       };
-      return state;
     }
 
     case API_ERROR: {
-      state = {
+      return {
         ...state,
-        errorMessage: action.message,
+        errorMessage: action.message, 
+        isAuth: false, 
       };
-      return state;
     }
 
     default:
