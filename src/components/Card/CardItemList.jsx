@@ -10,22 +10,26 @@ const CardItemList = () => {
   const dispatch = useDispatch();
   const [searchValue, setSearchValue] = useState("");
   const cardList = useSelector((state) => state.cardsPage.cards);
+  const [debounceTimeout, setDebounceTimeout] = useState(null);
 
   const handleChange = (e) => {
     setSearchValue(e.target.value);
   };
 
-  const filterCards = () => {
-    let debounceTimeout;
-    clearTimeout(debounceTimeout);
-    debounceTimeout = setTimeout(() => {
+  useEffect(() => {
+    if (debounceTimeout) {
+      clearTimeout(debounceTimeout);
+    }
+
+    const timeoutId = setTimeout(() => {
       dispatch(fetchCardsThunkCreator(searchValue));
     }, 300);
-  };
+    setDebounceTimeout(timeoutId);
 
-  useEffect(() => {
-    filterCards();
-  }, [searchValue]);
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, [searchValue, dispatch]);
 
   return (
     <>
