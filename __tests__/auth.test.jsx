@@ -4,6 +4,7 @@ import { render, screen, fireEvent } from "@testing-library/react";
 import { Provider } from "react-redux";
 import configureStore from "redux-mock-store";
 import { login } from "../src/http/authApi";
+import { MemoryRouter } from "react-router-dom";
 
 const thunk = require("redux-thunk").thunk;
 
@@ -36,7 +37,9 @@ describe("Login Component", () => {
 
     render(
       <Provider store={store}>
-        <Login />
+        <MemoryRouter>
+          <Login />
+        </MemoryRouter>
       </Provider>
     );
 
@@ -66,7 +69,7 @@ describe("Login Component", () => {
     // Mock the rejected login response
     login.mockRejectedValueOnce({
       response: {
-        data: { message: errorMessage },
+        data: { errors: { username: errorMessage, password: errorMessage } },
       },
     });
 
@@ -74,7 +77,9 @@ describe("Login Component", () => {
 
     render(
       <Provider store={store}>
-        <Login />
+        <MemoryRouter>
+          <Login />
+        </MemoryRouter>
       </Provider>
     );
 
@@ -94,7 +99,12 @@ describe("Login Component", () => {
 
     // Check that the error action is dispatched with the correct message
     expect(actions).toEqual(
-      expect.arrayContaining([{ type: "API_ERROR", message: errorMessage }])
+      expect.arrayContaining([
+        {
+          type: "API_ERROR",
+          errors: { username: errorMessage, password: errorMessage },
+        },
+      ])
     );
   });
 });
