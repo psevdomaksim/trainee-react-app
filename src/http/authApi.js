@@ -2,42 +2,62 @@ import { $host } from "./http";
 import { jwtDecode } from "jwt-decode";
 
 export const login = async ({ username, password }) => {
-  const { data } = await $host.post("api/auth/login", {
-    username,
-    password,
-  });
+  const { data } = await $host.post(
+    "api/auth/login",
+    {
+      username,
+      password,
+    },
+    {
+      withCredentials: true,
+    }
+  );
 
   localStorage.setItem("token", data.accessToken);
   return jwtDecode(data.accessToken);
 };
 
-export const signup = async (
-{  username,
+export const signup = async ({
+  username,
   password,
   repeatedPassword,
   firstname,
   lastname,
-  age}
-) => {
-  const { data } = await $host.post("api/auth/signup", {
-    username,
-    password,
-    repeatedPassword,
-    firstname,
-    lastname,
-    age,
-  });
+  age,
+}) => {
+  const { data } = await $host.post(
+    "api/auth/signup",
+    {
+      username,
+      password,
+      repeatedPassword,
+      firstname,
+      lastname,
+      age,
+    },
+    {
+      withCredentials: true,
+    }
+  );
   localStorage.setItem("token", data.accessToken);
   return jwtDecode(data.accessToken);
 };
 
 export const logout = async () => {
-  await $host.post("/api/auth/logout");
+  await $host.post(
+    "/api/auth/logout",
+    {},
+    {
+      withCredentials: true,
+    }
+  );
   localStorage.removeItem("token");
 };
 
 export const checkAuth = async () => {
-  const { data } = await $host.post("api/auth/refresh");
+  const { data } = await $host.post("api/auth/refresh", {
+    withCredentials: true,
+  });
   localStorage.setItem("token", data.accessToken);
   return jwtDecode(data.accessToken);
 };
