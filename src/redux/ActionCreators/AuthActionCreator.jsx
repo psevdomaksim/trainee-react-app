@@ -35,7 +35,7 @@ export const loginThunkCreator = (username, password) => {
         dispatch(loginActionCreator(user));
       })
       .catch((err) => {
-        dispatch(apiErrorActionCreator(err.response.data.errors));
+        dispatch(apiErrorActionCreator(err.response?.data?.errors));
       });
   };
 };
@@ -48,7 +48,7 @@ export const setLoginThunkCreator = () => {
           dispatch(loginActionCreator(user));
         })
         .catch((err) => {
-          dispatch(apiErrorActionCreator(err.response.data.errors));
+          dispatch(apiErrorActionCreator(err.response?.data?.errors));
         });
     }
   };
@@ -71,7 +71,7 @@ export const signupThunkCreator = (username, password, repeatedPassword, firstna
         dispatch(loginActionCreator(user));
       })
       .catch((err) => {
-        dispatch(apiErrorActionCreator(err.response.data.errors));
+        dispatch(apiErrorActionCreator(err.response?.data?.errors));
       });
   };
 };
