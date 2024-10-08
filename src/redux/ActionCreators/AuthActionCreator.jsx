@@ -1,24 +1,77 @@
-import { users } from "../../db";
-import { API_ERROR, LOGIN } from "../../utils/ActionCreator_consts";
+import { checkAuth, login, logout, signup } from "../../http/authApi.js";
+import { API_ERROR, CLEAR_API_ERROR, LOGIN, LOGOUT } from "../../utils/ActionCreator_consts.js";
 
-export const loginActionCreator = (username, password) => {
-  const findUser = users.find((el) => {
-    return el.username === username && el.password === password;
-  });
-
-  if (findUser === undefined) {
-    return apiErrorActionCreator("User with this data not found");
-  }
-
+export const loginActionCreator = (user) => {
   return {
     type: LOGIN,
-    user: { username, password },
+    user: user,
   };
 };
 
-export const apiErrorActionCreator = (msg) => {
+export const logoutActionCreator = () => {
+  return {
+    type: LOGOUT,
+  };
+};
+
+export const apiErrorActionCreator = (errors) => {
+ 
   return {
     type: API_ERROR,
-    message: msg,
+    errors: errors,
+  };
+};
+
+export const clearApiErrorActionCreator = () => {
+  return {
+    type: CLEAR_API_ERROR,
+  };
+};
+
+export const loginThunkCreator = (username, password) => {
+  return (dispatch) => {
+    return login({ username, password })
+      .then((user) => {
+        dispatch(loginActionCreator(user));
+      })
+      .catch((err) => {
+        dispatch(apiErrorActionCreator(err.response?.data?.errors));
+      });
+  };
+};
+
+export const setLoginThunkCreator = () => {
+  return (dispatch) => {
+    if (localStorage.getItem("accessToken")) {
+      checkAuth()
+        .then((user) => {
+          dispatch(loginActionCreator(user));
+        })
+        .catch((err) => {
+          dispatch(apiErrorActionCreator(err.response?.data?.errors));
+        });
+    }
+  };
+};
+
+export const logoutThunkCreator = () => {
+  return (dispatch) => {
+    return logout().then(() => {
+      dispatch(logoutActionCreator());
+    });
+  };
+};
+
+
+
+export const signupThunkCreator = (username, password, repeatedPassword, firstname, lastname, age) => {
+  return (dispatch) => {
+    return signup({ username, password, repeatedPassword, firstname, lastname, age })
+      .then((user) => {
+        dispatch(loginActionCreator(user));
+      })
+      .catch((err) => {
+        dispatch(apiErrorActionCreator(err.response?.data?.errors));
+      });
   };
 };

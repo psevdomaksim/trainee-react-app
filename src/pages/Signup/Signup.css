@@ -1,5 +1,4 @@
-
-.login-container {
+.signup-container {
   max-width: 400px;
   margin: 0 auto;
   padding: 1.5rem;
@@ -8,7 +7,7 @@
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.login-form h2 {
+.signup-form h2 {
   text-align: center;
   margin-bottom: 1rem;
 }
@@ -30,7 +29,7 @@
   border-radius: 4px;
 }
 
-.login-button {
+.signup-button {
   width: 100%;
   padding: 0.75rem;
   background-color: #28a745;
@@ -42,7 +41,7 @@
   margin-top: 10px;
 }
 
-.login-button:hover {
+.signup-button:hover {
   background-color: #218838;
 }
 
