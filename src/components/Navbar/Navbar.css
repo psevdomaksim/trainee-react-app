@@ -43,3 +43,7 @@
 .nav-list li:hover > ul {
   display: block;
 }
+
+.logout_btn{
+  cursor: pointer;
+}

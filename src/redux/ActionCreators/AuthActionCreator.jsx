@@ -42,7 +42,7 @@ export const loginThunkCreator = (username, password) => {
 
 export const setLoginThunkCreator = () => {
   return (dispatch) => {
-    if (localStorage.getItem("token")) {
+    if (localStorage.getItem("accessToken")) {
       checkAuth()
         .then((user) => {
           dispatch(loginActionCreator(user));

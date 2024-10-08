@@ -10,9 +10,15 @@ export const fetchCardsActionCreator = (data) => {
 };
 
 export const fetchCardsThunkCreator = (searchValue) => {
+  if (!searchValue)
+    return (dispatch) => {
+      fetchCards().then((data) => {
+        dispatch(fetchCardsActionCreator(data.cards));
+      });
+    };
   return (dispatch) => {
     fetchCards(searchValue).then((data) => {
-      dispatch(fetchCardsActionCreator(data));
+      dispatch(fetchCardsActionCreator(data.cards));
     });
   };
 };

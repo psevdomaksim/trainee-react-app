@@ -76,6 +76,10 @@ hr {
   .signup-container{
     margin-top: 5em !important;
   }
+  .logout_btn{
+    position: absolute !important;
+    right: 7em !important;
+  }
 } 
 
 @media (min-width: 800px) and (max-width: 1000px) {
